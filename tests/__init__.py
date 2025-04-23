@@ -1,1 +1,0 @@
-"""Template doc string."""

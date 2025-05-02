@@ -22,5 +22,10 @@ clean:
 	rm -rf build/
 	rm -rf dist/
 	rm -rf juninit-pytest.xml
+	rm -rf logs/*
 	find . -name ".coverage*" -delete
 	find . -name --pycache__ -exec rm -r {} +
+
+update:
+	poetry cache clear pypi --all
+	poetry update

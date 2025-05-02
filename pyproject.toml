@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "change-me"
-version = "0.1.0"
+version = "0.0.1a"
 description = "A simple Python template"
 authors = ["Tsmorz <tonysmoragiewicz@gmail.com>"]
 readme = "README.md"
 package-mode = true
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = "^3.12"
 numpy = "^2.2.3"
 pytest = "^8.3.5"
 pytest-cov = "^6.0.0"
@@ -15,6 +15,7 @@ loguru = "^0.7.3"
 pre-commit = "^4.1.0"
 scipy = "^1.15.2"
 tqdm = "^4.67.1"
+poetry-core = "^2.1.2"
 
 
 [build-system]
@@ -69,7 +70,7 @@ fix = true
 
 # Sort imports automatically
 [tool.lint.isort]
-known-first-party = ["change-me"]  # Replace with your project name
+known-first-party = ["change-me"]  # Replace it with your project name
 combine-as-imports = true
 
 # Enforce docstring styles

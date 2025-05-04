@@ -3,6 +3,7 @@
 import time
 
 import wifi
+from passwords import aio_credentials
 from temperature_uploader import TemperatureUploader
 from wifi_ble_manager import WiFiBLEManager
 
@@ -19,7 +20,7 @@ def main() -> None:
         return
 
     uploader = TemperatureUploader(
-        aio_username="Tsmorz", aio_key="aio_aLSb60416GPJhv7pDahVUjFd5m9o"
+        aio_username=aio_credentials["username"], aio_key=aio_credentials["key"]
     )
 
     while True:

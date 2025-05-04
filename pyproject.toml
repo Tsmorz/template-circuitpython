@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "change-me"
 version = "0.0.1a"
-description = "A simple Python template"
+description = "A simple CircuitPython template"
 authors = ["Tsmorz <tonysmoragiewicz@gmail.com>"]
 readme = "README.md"
 package-mode = true
@@ -11,11 +11,12 @@ python = "^3.12"
 numpy = "^2.2.3"
 pytest = "^8.3.5"
 pytest-cov = "^6.0.0"
-loguru = "^0.7.3"
 pre-commit = "^4.1.0"
-scipy = "^1.15.2"
-tqdm = "^4.67.1"
 poetry-core = "^2.1.2"
+adafruit-blinka = "^8.56.0"
+adafruit-circuitpython-ble = "^10.0.12"
+adafruit-circuitpython-neopixel = "^6.3.15"
+adafruit-python-shell = "^1.9.1"
 
 
 [build-system]
@@ -63,6 +64,9 @@ lint.ignore = [
     "S607",  # Starting a process with a partial executable path
     "S605",  # Starting a process with a shell
     "S603",  # `subprocess` call: check for execution of untrusted input
+    "T201",  # `print` found
+    "D100",  # Missing docstring in public module
+    "D104",  # Missing docstring in public package
 ]
 
 # Automatically fix issues where possible
@@ -84,4 +88,4 @@ indent-style = "space"  # Use spaces instead of tabs
 line-ending = "lf"      # Use LF for line endings (Unix standard)
 
 [tool.poetry.urls]
-homepage = "https://github.com/Tsmorz/template-python"
+homepage = "https://github.com/Tsmorz/template-circuitpython"

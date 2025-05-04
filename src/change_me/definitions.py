@@ -1,3 +1,22 @@
-"""Sample doc string."""
+"""Template doc string."""
 
-DUMMY_VARIABLE = "dummy_variable"
+BAUD_RATES = [
+    1200,
+    2400,
+    4800,
+    9600,
+    14400,
+    19200,
+    28800,
+    38400,
+    57600,
+    76800,
+    115200,
+    230400,
+    250000,
+    460800,
+    921600,
+    1000000,
+]
+
+BAUD_RATE = BAUD_RATES[6]

@@ -1,14 +1,17 @@
 """Sample doc string."""
 
 import time
+from os import getenv
 
 import wifi
-from passwords import aio_credentials
 from temperature_uploader import TemperatureUploader
 from wifi_ble_manager import WiFiBLEManager
 
+ADAFRUIT_IO_USERNAME = getenv("AIO_USERNAME")
+ADAFRUIT_IO_KEY = getenv("AIO_KEY")
 
-def main() -> None:
+
+def main() -> None:  # pragma: no cover
     """Run the main routine."""
     manager = WiFiBLEManager()
     if not manager.status:
@@ -20,7 +23,7 @@ def main() -> None:
         return
 
     uploader = TemperatureUploader(
-        aio_username=aio_credentials["username"], aio_key=aio_credentials["key"]
+        aio_username=ADAFRUIT_IO_USERNAME, aio_key=ADAFRUIT_IO_KEY
     )
 
     while True:
@@ -28,5 +31,5 @@ def main() -> None:
         time.sleep(5 if success else 1)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()

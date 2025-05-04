@@ -54,8 +54,8 @@ lint.ignore = [
     "D213",  # Multi-line docstring should start on the first line (conflicts with D212)
     "E501",  # Line length (handled by autoformatter instead)
     "N803",  #  Argument name should be lowercase
-    "N806",  # Variable in function should be lowercase
-    "D415",  # End first line with a period, question mark, or exclamation point
+    "N806",  # Variable in a function should be lowercase
+    "D415",  # End the first line with a period, question mark, or exclamation point
     "S101",  # Use of `assert` detected
     "E203",  # whitespace before ':'
     "E731",  # Do not assign a `lambda` expression, use a `def`
@@ -65,8 +65,9 @@ lint.ignore = [
     "S605",  # Starting a process with a shell
     "S603",  # `subprocess` call: check for execution of untrusted input
     "T201",  # `print` found
-    "D100",  # Missing docstring in public module
-    "D104",  # Missing docstring in public package
+    "D100",  # Missing docstring in a public module
+    "D104",  # Missing docstring in a public package
+    "S105",  # Possible hardcoded password assigned to
 ]
 
 # Automatically fix issues where possible

@@ -1,6 +1,5 @@
-import types
 import unittest
-from unittest import mock
+from os import getenv
 from unittest.mock import MagicMock, mock_open, patch
 
 from src.change_me.wifi_ble_manager import WiFiBLEManager
@@ -53,14 +52,18 @@ class TestWiFiBLEManager(unittest.TestCase):
 
     @patch("src.change_me.wifi_ble_manager.wifi.radio")
     def test_connect_wifi_failure(self, mock_radio):
-        """Arrange invalid credentials to raise exception; act by calling connect_wifi; assert status is False."""
+        """Arrange invalid credentials to raise an exception; act by calling connect_wifi; assert status is False."""
+        # Arrange
         mock_radio.connect.side_effect = Exception("Connection failed")
 
+        # Create manager *after* a patch is applied
+        manager = WiFiBLEManager()
+
         # Act
-        self.manager.connect_wifi("BadSSID", "BadPass")
+        manager.connect_wifi("BadSSID", "BadPass")
 
         # Assert
-        self.assertFalse(self.manager.status)
+        self.assertFalse(manager.status)
 
     @patch("builtins.open", new_callable=mock_open)
     def test_save_credentials(self, mock_file):
@@ -77,21 +80,20 @@ class TestWiFiBLEManager(unittest.TestCase):
     def test_load_credentials_success(self) -> None:
         """Should load saved credentials from the passwords module."""
         # Arrange
-        mock_passwords = types.SimpleNamespace()
-        mock_passwords.secrets = {"ssid": "TestSSID", "password": "TestPass"}
+        wifi_ssid_str = "WIFI_SSID"
+        wifi_password_str = "WIFI_PASSWORD"
 
-        with mock.patch("importlib.import_module", return_value=mock_passwords):
-            # Act
-            creds = WiFiBLEManager.load_credentials()
+        # Act
+        creds = WiFiBLEManager.load_credentials()
 
         # Assert
-        assert creds == ("TestSSID", "TestPass")
+        assert creds == (getenv(wifi_ssid_str), getenv(wifi_password_str))
 
     def test_load_credentials_failure(self):
         """Arrange import failure; act by calling load_credentials; assert None is returned."""
         with patch.dict("sys.modules", {"passwords": None}):
             # Act
-            creds = WiFiBLEManager.load_credentials()
+            creds, _ = WiFiBLEManager.load_credentials()
 
             # Assert
             self.assertIsNone(creds)

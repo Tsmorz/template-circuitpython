@@ -1,7 +1,8 @@
 """Wi-Fi BLE Manager for QT Py ESP32-S3."""
 
-import importlib  # add this to the top of your module
 import time
+from os import getenv
+from typing import Optional
 
 import board
 import neopixel
@@ -85,7 +86,9 @@ class WiFiBLEManager:
         print("Invalid format. Expecting 'ssid=...;pwd=...;'")
         return None
 
-    def connect_wifi(self, ssid: str, password: str, save: bool = False) -> None:
+    def connect_wifi(
+        self, ssid: Optional[str], password: Optional[str], save: bool = False
+    ) -> None:
         """Connect to Wi-Fi and optionally saves credentials.
 
         :param ssid: Wi-Fi network name
@@ -102,7 +105,7 @@ class WiFiBLEManager:
             self.set_status("success")
             self.status = True
 
-            if save:
+            if save and ssid is not None and password is not None:
                 self.save_credentials(ssid, password)
         except Exception as e:
             print("Wi-Fi connection failed:", e)
@@ -119,14 +122,13 @@ class WiFiBLEManager:
         except Exception as e:
             print("Failed to save credentials:", e)
 
-    import importlib  # add this to the top of your module
-
     @staticmethod
-    def load_credentials() -> tuple[str, str] | None:
-        """Load credentials from the passwords.py file if available."""
+    def load_credentials() -> tuple[str | None, str | None] | None:
+        """Load credentials from the settings.toml file if available."""
         try:
-            passwords = importlib.import_module("passwords")
-            return passwords.secrets["ssid"], passwords.secrets["password"]
+            ssid = getenv("WIFI_SSID")
+            password = getenv("WIFI_PASSWORD")
+            return ssid, password
         except Exception as err:
             print(f"Failed to load credentials: {err}")
             return None
